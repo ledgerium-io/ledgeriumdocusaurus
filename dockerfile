@@ -6,8 +6,8 @@ RUN apk add --no-cache --virtual .build-deps \
         python \
         make \
         g++ \
-	autoconf \
-	gifsicle \
+		autoconf \
+		gifsicle \
     	automake \
     	libc6-compat \
     	libjpeg-turbo-dev \
@@ -24,31 +24,23 @@ COPY ./docusaurus.sh /doc_govapp
 RUN echo "List, after copying"
 RUN ls
 
-RUN    chmod +x ./docusaurus.sh &&\
+RUN chmod +x ./docusaurus.sh &&\
     git clone https://github.com/ledgerium/governanceapp.git
 
-RUN echo "List, after clonig governanceapp"
+RUN echo "List, after cloning governanceapp"
 RUN ls
 
 RUN npm install -g solidity-docgen
-
 RUN npm install --g docusaurus-init
 
-#RUN npm install --unsafe-perm -g  solc
-
-# RUN which solc
-
 RUN npm --version
+RUN ls -latr
 
 RUN ./docusaurus.sh
 
-WORKDIR /doc_govapp/docusaurus/docs
-
-RUN ls
-
 WORKDIR /doc_govapp/docusaurus/website
-
 RUN ls
 
 # CMD ["node","docusaurus-start"]
 ENTRYPOINT ["tail", "-f", "/dev/null"]
+#ENTRYPOINT ["./docusaurus.sh"]

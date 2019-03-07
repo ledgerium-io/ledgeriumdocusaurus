@@ -1,3 +1,6 @@
+#!/bin/bash
+
+echo "docusaurus script begins"
 DIRECTORY="$PWD/docusaurus"
 
 if [ ! -d $DIRECTORY ]; then 
@@ -55,4 +58,3 @@ EOF
 # Start docusaurus
 echo "Docusaurus built"
 echo $PWD
-
