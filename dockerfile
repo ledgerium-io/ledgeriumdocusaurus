@@ -21,14 +21,10 @@ WORKDIR /doc_govapp
 RUN echo "Copying shell script to image"
 COPY ./docusaurus.sh /doc_govapp
 
-RUN echo "List, after copying"
-RUN ls
+RUN    	chmod +x ./docusaurus.sh &&\
+    	git clone https://github.com/ledgerium/governanceapp.git
 
-RUN chmod +x ./docusaurus.sh &&\
-    git clone https://github.com/ledgerium/governanceapp.git
-
-RUN echo "List, after cloning governanceapp"
-RUN ls
+RUN echo "List, after clonig governanceapp"
 
 RUN npm install -g solidity-docgen
 RUN npm install --g docusaurus-init
@@ -38,9 +34,9 @@ RUN ls -latr
 
 RUN ./docusaurus.sh
 
+COPY ./sidebars.js /doc_govapp/docusaurus/website
+
 WORKDIR /doc_govapp/docusaurus/website
-RUN ls
 
 # CMD ["node","docusaurus-start"]
 ENTRYPOINT ["tail", "-f", "/dev/null"]
-#ENTRYPOINT ["./docusaurus.sh"]
