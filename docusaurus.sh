@@ -1,6 +1,3 @@
-#!/bin/bash
-
-echo "docusaurus script begins"
 DIRECTORY="$PWD/docusaurus"
 
 if [ ! -d $DIRECTORY ]; then 
@@ -30,31 +27,5 @@ solidity-docgen $PWD/governanceapp $PWD/governanceapp/contracts $PWD/docusaurus
 #edit sidebars.json in docusaurus
 cd docusaurus/website
 
-node <<EOF
-
-//Read data
-var fs = require('fs');
-
-var data = {
-  "docs": {
-    "Geting Started": [
-      "AdminValidatorSet",
-      "Ownable",
-      "SafeMath",
-      "SimpleValidatorSet",
-      "Voteable"
-    ],
-    "Docusaurus": [
-      "doc1"
-    ]
-  }
-}
-
-//Output data
-fs.writeFileSync('./sidebars.json',JSON.stringify(data))
-
-EOF
-
 # Start docusaurus
 echo "Docusaurus built"
-echo $PWD
